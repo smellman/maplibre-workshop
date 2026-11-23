@@ -6,10 +6,12 @@ set -e
 # E.g. from https://geobounds.com/
 
 # Bounding box coordinates (format: min_lon,min_lat,max_lon,max_lat)
-MIN_LON=132.1785
-MIN_LAT=34.2901
-MAX_LON=132.6961
-MAX_LAT=34.6138
+# Otaru City
+# 140.8163, 43.0608, 141.2925, 43.5674
+MIN_LON=140.8163
+MIN_LAT=43.0608
+MAX_LON=141.2925
+MAX_LAT=43.5674
 
 OUTPUT_FILE="/data/sources/workshop.osm.pbf"
 mkdir -p "$(dirname "${OUTPUT_FILE}")"
@@ -60,12 +62,12 @@ MAX_ATTEMPTS=60
 ATTEMPT=0
 while [ ${ATTEMPT} -lt ${MAX_ATTEMPTS} ]; do
   STATUS=$(curl -s "https://slice.openstreetmap.us/api/${JOB_ID}")
-  
+
   if echo "${STATUS}" | grep -q '"Complete":true'; then
     echo "Slice is ready!"
     break
   fi
-  
+
   if echo "${STATUS}" | grep -q '"Complete":false'; then
     ATTEMPT=$((ATTEMPT + 1))
     echo "Waiting... (attempt ${ATTEMPT}/${MAX_ATTEMPTS})"
