@@ -1,6 +1,6 @@
 services:
   devenv:
-    image: ghcr.io/smellman/workshop:hiroshima
+    image: ghcr.io/smellman/workshop:otaru
     restart: unless-stopped
     command: sleep infinity
 
